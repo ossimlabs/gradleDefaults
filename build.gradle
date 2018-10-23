@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven { url "https://repo.grails.org/grails/core" }
+        jcenter()
+    }
+}
+
+plugins {
+    id 'maven-publish'
+    id 'java'
+    id 'groovy'
+}
+
+repositories {
+    mavenLocal()
+    maven { url "https://repo.grails.org/grails/core" }
+    jcenter()
+}
+dependencies {
+    compile gradleApi()
+    compile 'com.bmuschko:gradle-docker-plugin:3.0.12'
+    compile "org.grails:grails-gradle-plugin:$grailsVersion"
+    compile "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
+    compile "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.8"
+}
+
+group = 'io.ossim'
+version = '1.0'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = project.name
+            version = version
+
+            from components.java
+        }
+    }
+}
