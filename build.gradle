@@ -17,6 +17,7 @@ repositories {
     maven { url "https://repo.grails.org/grails/core" }
     jcenter()
 }
+
 dependencies {
     compile gradleApi()
     compile 'com.bmuschko:gradle-docker-plugin:3.0.12'
@@ -36,6 +37,11 @@ publishing {
             version = version
 
             from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = "System.env('MAVEN_REPOSITORY_URL')"
         }
     }
 }

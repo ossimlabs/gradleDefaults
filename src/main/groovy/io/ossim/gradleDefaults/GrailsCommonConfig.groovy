@@ -1,15 +1,8 @@
 package io.ossim.gradleDefaults
 
-
-import asset.pipeline.gradle.AssetPipelinePlugin
 import org.gradle.api.Project
+import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.testing.Test
-import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
-import org.gradle.tooling.provider.model.internal.DefaultToolingModelBuilderRegistry
-import org.grails.gradle.plugin.core.GrailsPluginGradlePlugin
-import org.grails.gradle.plugin.publishing.GrailsCentralPublishGradlePlugin
-import org.grails.gradle.plugin.web.GrailsWebGradlePlugin
-import org.grails.gradle.plugin.web.gsp.GroovyPagePlugin
 
 
 class GrailsCommonConfig {
@@ -36,23 +29,38 @@ class GrailsCommonConfig {
                                     boolean isGrailsApp,
                                     boolean isGrailsPlugin) {
 
-        ToolingModelBuilderRegistry reg = new DefaultToolingModelBuilderRegistry()
-        if (isGrailsApp) {
-            new GrailsWebGradlePlugin(reg).apply(subproject)
-        } else if (isGrailsPlugin){
-            new GrailsPluginGradlePlugin(reg).apply(subproject)
-            new GrailsCentralPublishGradlePlugin().apply(subproject)
-        }
-        new AssetPipelinePlugin().apply(subproject)
-        new GroovyPagePlugin().apply(subproject)
-
         subproject.repositories{
             mavenLocal()
+            mavenCentral()
             maven { url "https://repo.grails.org/grails/core" }
         }
 
+//        subproject.apply plugin: "java-base"
+//        subproject.apply plugin: "maven-publish"
+//        subproject.publishing {
+//            publications {
+//                mavenJava(MavenPublication) {
+//                    from components.java
+//                }
+//            }
+//        }
+
+        // Apply plugins
+        subproject.apply plugin: "eclipse"
+        subproject.apply plugin: "idea"
+        if (isGrailsApp) {
+            subproject.apply plugin: "org.grails.grails-web"
+        }
+        if (isGrailsPlugin) {
+            subproject.apply plugin: "org.grails.grails-plugin"
+            subproject.apply plugin: "org.grails.grails-plugin-publish"
+        }
+        subproject.apply plugin: "org.grails.grails-gsp"
+        subproject.apply plugin: "asset-pipeline"
+        subproject.apply plugin: "java-base"
+
+        // Apply dependencies
         subproject.dependencies {
-            compile "org.springframework.boot:spring-boot-starter-logging"
             compile "org.springframework.boot:spring-boot-starter-logging"
             compile "org.springframework.boot:spring-boot-autoconfigure"
             compile "org.grails:grails-core"
@@ -129,6 +137,13 @@ class GrailsCommonConfig {
             } else if (isGrailsPlugin) {
                 subproject.getProperties().put('packagePlugin', true)
             }
+        }
+
+        subproject.bootRun {
+            jvmArgs('-Dspring.output.ansi.enabled=always')
+            addResources = true
+            String springProfilesActive = 'spring.profiles.active'
+            systemProperty springProfilesActive, System.getProperty(springProfilesActive)
         }
     }
 }
