@@ -20,6 +20,12 @@ class Base implements Plugin<Project> {
         }
     }
 
+    void setAdditionalVariables(Project project){
+        project.ext {
+            mavenRepoUrl = System.getenv('MAVEN_REPOSITORY_URL')
+        }
+    }
+
     void setVersionVariables(Project project) {
         project.ext{
             springBootV = "1.5.10.RELEASE"

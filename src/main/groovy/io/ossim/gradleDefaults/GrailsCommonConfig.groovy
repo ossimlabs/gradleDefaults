@@ -132,10 +132,10 @@ class GrailsCommonConfig {
 
         subproject.assets {
             if (isGrailsApp) {
-                subproject.getProperties().put('minifyJs', true)
-                subproject.getProperties().put('minifyCss', true)
+                minifyJs = true
+                minifyCss = true
             } else if (isGrailsPlugin) {
-                subproject.getProperties().put('packagePlugin', true)
+                packagePlugin = true
             }
         }
 
