@@ -24,6 +24,7 @@ class Base implements Plugin<Project> {
     void setAdditionalVariables(Project project){
         project.ext {
             mavenRepoUrl = System.getenv('MAVEN_REPOSITORY_URL')
+            gradleOffline = System.getenv('GRADLE_OFFLINE')
         }
     }
 
