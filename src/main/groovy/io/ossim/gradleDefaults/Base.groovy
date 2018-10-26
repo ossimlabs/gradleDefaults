@@ -13,6 +13,7 @@ class Base implements Plugin<Project> {
 //        }
 
         setVersionVariables(project)
+        setAdditionalVariables(project)
 
         if (project.findProperty('includeDocker')) {
             Docker docker = new Docker()
