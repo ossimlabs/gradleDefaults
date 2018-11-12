@@ -31,9 +31,12 @@ class Docker {
         String dockerBaseImage = project.findProperty('dockerBaseImage')
 
         // Variables constructed from other variables
-        if (jarLocation == Null) {
+        if (project.hasProperty('jarLocation')) {
+            String jarLocation = project.jarLocation
+        } else {
             String jarLocation = "${project.rootDir}/apps/${project.name}-app/build/libs/${project.name}-app-${versionNumber}.jar"
         }
+
         String image = "${project.name}:${dockerAppTag}"
         String dockerDir = "${project.rootDir}/docker"
 
