@@ -30,13 +30,20 @@ class Docker {
         String versionNumber = project.findProperty('versionNumber')
         String dockerBaseImage = project.findProperty('dockerBaseImage')
 
-        String jarLocation = ""
+        String jarDir
+        String jarFile
 
         // Variables constructed from other variables
-        if (project.hasProperty('jarLocation')) {
-            jarLocation = project.jarLocation
+        if (project.hasProperty('jarDir')) {
+            jarDir = project.jarDir
         } else {
-            jarLocation = "${project.rootDir}/apps/${project.name}-app/build/libs/${project.name}-app-${versionNumber}.jar"
+            jarDir = "${project.rootDir}/apps/${project.name}-app/build/libs/"
+        }
+
+        if (project.hasProperty('jarFile')) {
+            jarFile = project.jarFile
+        } else {
+            jarFile = "${project.name}-app-${versionNumber}.jar"
         }
 
         String image = "${project.name}:${dockerAppTag}"
@@ -45,9 +52,9 @@ class Docker {
         // Copy the built jar to the docker directory
         project.task('copyJarToDockerDir', type: Copy) {
             doFirst {
-                println "Copying ${jarLocation} to ${dockerDir}"
+                println "Copying ${jarDir}/${jarFile} to ${dockerDir}"
             }
-            from "${jarLocation}"
+            from "${jarDir}/${jarFile}"
             into "${dockerDir}"
         }
 
