@@ -29,7 +29,7 @@ class GrailsCommonConfig {
                                     boolean isGrailsApp,
                                     boolean isGrailsPlugin) {
 
-        subproject.repositories{
+        subproject.repositories {
             mavenLocal()
             mavenCentral()
             maven { url "https://repo.grails.org/grails/core" }

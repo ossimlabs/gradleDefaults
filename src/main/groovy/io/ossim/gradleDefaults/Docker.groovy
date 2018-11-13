@@ -19,7 +19,6 @@ class Docker {
 
         // Variables pulled from Environment variables
         String dockerRegistryUrl = System.getenv("DOCKER_REGISTRY_URL")
-        String dockerAppTag = System.getenv("DOCKER_TAG") ?: "latest"
 
         DockerRegistryCredentials dockerRegistryCredentials = new DockerRegistryCredentials()
         dockerRegistryCredentials.username = System.getenv("DOCKER_USERNAME")
@@ -32,6 +31,12 @@ class Docker {
 
         String jarDir
         String jarFile
+        String dockerDir
+
+        Boolean buildDocker
+
+        String dockerAppTag
+        String copyFile
 
         // Variables constructed from other variables
         if (project.hasProperty('jarDir')) {
@@ -46,8 +51,31 @@ class Docker {
             jarFile = "${project.name}-app-${versionNumber}.jar"
         }
 
+        if (project.hasProperty('jarFile')) {
+            dockerDir = project.dockerDir
+        } else {
+            dockerDir = "${project.rootDir}/docker"
+        }
+
+        if (project.hasProperty('buildDocker')) {
+            buildDocker = project.buildDocker
+        } else {
+            buildDocker = true
+        }
+
+        if (project.hasProperty('dockerTag')) {
+            dockerAppTag = project.dockerTag
+        } else {
+            dockerAppTag = System.getenv("DOCKER_TAG") ?: "latest"
+        }
+
+        if (project.hasProperty('copyFile')) {
+            copyFile = project.copyFile
+        } else {
+            copyFile = jarFile
+        }
+
         String image = "${project.name}:${dockerAppTag}"
-        String dockerDir = "${project.rootDir}/docker"
 
         // Copy the built jar to the docker directory
         project.task('copyJarToDockerDir', type: Copy) {
@@ -56,38 +84,43 @@ class Docker {
             }
             from "${jarDir}/${jarFile}"
             into "${dockerDir}"
+            onlyIf { return buildDocker }
         }
 
         // Add each subproject assemble task as a dependency for the copyTask
-        for (Project subProject : project.getSubprojects()){
-            project.copyJarToDockerDir.dependsOn.add("${subProject.name}:assemble")
+        for (Project subProject : project.getAllprojects()){
+            project.copyJarToDockerDir.dependsOn.add(":${subProject.name}:assemble")
         }
 
         // Pull the base docker image from the remote repo
         project.task('pullBaseDockerImage', type: DockerPullImage) {
             repository "${dockerRegistryUrl}/${dockerBaseImage}"
             tag "latest"
+            onlyIf { return buildDocker }
         }
 
         //
         project.task('buildDockerImage', type: DockerBuildImage, dependsOn: ['copyJarToDockerDir', 'pullBaseDockerImage']) {
-            inputDir = project.file("${project.rootProject.projectDir}/docker")
+            inputDir = project.file(dockerDir)
             tag = "${image}"
             buildArgs = ["BASE_IMAGE": "${dockerRegistryUrl}/${dockerBaseImage}",
-                         "JAR_FILE": "${jarFile}"]
+                         "COPY_FILE": "${copyFile}"]
             registryCredentials = dockerRegistryCredentials
+            onlyIf { return buildDocker }
         }
 
         project.task('tagDockerImage', type: DockerTagImage, dependsOn: 'buildDockerImage'){
             imageId "${image}"
             tag "${dockerAppTag}"
             repository "${dockerRegistryUrl}/${project.name}"
+            onlyIf { return buildDocker }
         }
 
         project.task('pushDockerImage', type: DockerPushImage, dependsOn: 'tagDockerImage') {
             imageName "${dockerRegistryUrl}/${project.name}"
             tag "${dockerAppTag}"
             registryCredentials = dockerRegistryCredentials
+            onlyIf { return buildDocker }
         }
 
         // Add an action to remove the jar file from the docker dir to the clean task
