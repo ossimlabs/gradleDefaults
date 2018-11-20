@@ -9,7 +9,7 @@ class AddPublications {
         def publishingClosure = {
             publications {
                 "${name}" ( MavenPublication ) {
-                    artifact( file( "${ buildDir }/libs/${ project.name }-${ project.version }.jar" ) )
+                    artifact( file( "${ project.buildDir }/libs/${ project.name }-${ project.version }.jar" ) )
                 }
             }
             repositories {
