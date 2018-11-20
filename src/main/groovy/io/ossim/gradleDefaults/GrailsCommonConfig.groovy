@@ -30,7 +30,7 @@ class GrailsCommonConfig {
 
         Variables.setVersionVariables(subproject)
         Variables.setAdditionalVariables(subproject)
-        AddPublications.addUploadArtifact(subproject)
+        AddPublications.addPublication(subproject)
 
         subproject.repositories {
             mavenLocal()
