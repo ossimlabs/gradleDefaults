@@ -3,10 +3,28 @@ package io.ossim.gradleDefaults;
 import org.gradle.api.Project;
 
 class Variables {
+
+    String getCurrentGitBranch() {
+        def gitBranch = "Unknown branch"
+        try {
+            println "${project.projectDir}"
+            def workingDir = new File("${project.projectDir}")
+            def result = 'git rev-parse --abbrev-ref HEAD'.execute(null, workingDir)
+            result.waitFor()
+            if (result.exitValue() == 0) {
+                gitBranch = result.text.trim()
+            }
+        } catch (e) {
+            e.printStackTrace()
+        }
+        return gitBranch
+    }
+
     static void setAdditionalVariables(Project project){
         project.ext {
             mavenRepoUrl = System.getenv('MAVEN_REPOSITORY_URL')
             gradleOffline = System.getenv('GRADLE_OFFLINE')
+            buildVersionTag = getCurrentGitBranch() == "master" ? "RELEASE" : "SNAPSHOT"
         }
     }
 
