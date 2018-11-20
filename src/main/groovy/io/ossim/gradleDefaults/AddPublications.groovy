@@ -10,7 +10,13 @@ class AddPublications {
             publishing {
                 publications {
                     "${name}" (MavenPublication) {
-                        from components.java
+                        println(project.name)
+                        println(project.groupName)
+                        println(project.version)
+                        artifactId = project.name
+                        groupId = project.groupName
+                        version = project.version
+                        artifact(file("${buildDir}/libs/${project.name}-${project.version}.jar"))
                     }
                 }
                 repositories {
