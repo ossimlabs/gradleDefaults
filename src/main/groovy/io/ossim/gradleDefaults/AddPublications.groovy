@@ -4,7 +4,7 @@ import org.gradle.api.Project
 
 class AddPublications {
     static void addPublication(Project project) {
-        publishing {
+        project.publishing {
             publications {
                 bootJava( MavenPublication ) {
                     artifact( file( "${ buildDir }/libs/${ project.name }-${ project.version }.jar" ) )
