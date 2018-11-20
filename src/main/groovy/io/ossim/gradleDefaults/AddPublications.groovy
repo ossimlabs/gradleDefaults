@@ -9,11 +9,11 @@ class AddPublications {
         project.with {
             publishing {
                 publications {
-                    maven(MavenPublication) {
-                        groupId = groupName
+                    "${name}" (MavenPublication) {
                         artifactId = project.name
+                        groupId = groupName
                         version = versionNumber
-                        from components.java
+                        artifact(file("${buildDir}/libs/${project.name}-${project.version}.jar"))
                     }
                 }
                 repositories {
