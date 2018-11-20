@@ -29,6 +29,9 @@ class GrailsCommonConfig {
                                     boolean isGrailsApp,
                                     boolean isGrailsPlugin) {
 
+        Variables.setVersionVariables(subproject)
+        Variables.setAdditionalVariables(subproject)
+
         subproject.repositories {
             mavenLocal()
             mavenCentral()
