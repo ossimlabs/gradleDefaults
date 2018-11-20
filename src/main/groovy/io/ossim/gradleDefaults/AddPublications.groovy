@@ -17,7 +17,8 @@ class AddPublications {
                         println("=====")
                         artifactId = project.name
                         groupId = project.groupName
-                        version = project.version
+                        if (project.buildVersionTag == "SNAPSHOT")
+                        version = "${project.version}-SNAPSHOT"
                         artifact(file("${buildDir}/libs/${project.name}-${project.version}.jar"))
                     }
                 }
