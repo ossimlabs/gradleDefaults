@@ -14,7 +14,7 @@ class Base implements Plugin<Project> {
 
         Variables.setVersionVariables(project)
         Variables.setAdditionalVariables(project)
-        UploadArtifacts.addUploadArtifact(project)
+        AddPublications.addUploadArtifact(project)
 
         if (project.findProperty('includeDocker')) {
             Docker docker = new Docker()
