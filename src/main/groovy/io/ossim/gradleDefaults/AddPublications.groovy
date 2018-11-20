@@ -1,13 +1,14 @@
 package io.ossim.gradleDefaults
 
 import org.gradle.api.Project
+import org.gradle.api.publish.maven.MavenPublication
 
 class AddPublications {
     static void addPublication(Project project) {
         project.apply plugin: "maven-publish"
-        project.publishing {
+        def publishingClosure = {
             publications {
-                bootJava( MavenPublication ) {
+                "${name}" ( MavenPublication ) {
                     artifact( file( "${ buildDir }/libs/${ project.name }-${ project.version }.jar" ) )
                 }
             }
@@ -21,5 +22,7 @@ class AddPublications {
                 }
             }
         }
+        publishingClosure.setDelegate(project)
+        project.publishing(publishingClosure)
     }
 }
