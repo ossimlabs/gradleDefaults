@@ -133,7 +133,7 @@ class GrailsCommonConfig {
                 developers = [johndoe:"John Doe"]
             }
         }
-        
+
         AddPublications.addPublication(subproject)
 
         subproject.assets {
