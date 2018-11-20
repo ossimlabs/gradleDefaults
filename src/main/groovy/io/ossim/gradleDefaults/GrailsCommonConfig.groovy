@@ -79,7 +79,7 @@ class GrailsCommonConfig {
             compile "org.grails.plugins:scaffolding"
             compile "org.grails.plugins:gsp"
             console "org.grails:grails-console"
-            runtime "com.bertramlabs.plugins:asset-pipeline-grails:${project.assetPipelineGrailsV}"
+            runtime "com.bertramlabs.plugins:asset-pipeline-grails:${subproject.assetPipelineGrailsV}"
             testCompile "org.grails:grails-web-testing-support"
             testCompile "org.grails.plugins:geb:1.1.2"
 
@@ -89,13 +89,13 @@ class GrailsCommonConfig {
                 compile "org.grails.plugins:hibernate5"
                 compile "org.hibernate:hibernate-core:5.1.5.Final"
                 profile "org.grails.profiles:web"
-                runtime "org.glassfish.web:el-impl:${project.elImplV}"
+                runtime "org.glassfish.web:el-impl:${subproject.elImplV}"
                 runtime "com.h2database:h2"
                 runtime "org.apache.tomcat:tomcat-jdbc"
                 testCompile "org.grails:grails-gorm-testing-support"
-                testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:${project.seleniumHtmlUnitDriverV}"
-                testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:${project.seleniumHtmlUnitDriverV}"
-                testRuntime "net.sourceforge.htmlunit:htmlunit:${project.htmlUnitV}"
+                testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:${subproject.seleniumHtmlUnitDriverV}"
+                testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:${subproject.seleniumHtmlUnitDriverV}"
+                testRuntime "net.sourceforge.htmlunit:htmlunit:${subproject.htmlUnitV}"
             } else if (isGrailsPlugin) {
 
                 profile "org.grails.profiles:web-plugin"
