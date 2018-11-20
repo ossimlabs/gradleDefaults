@@ -4,6 +4,7 @@ import org.gradle.api.Project
 
 class AddPublications {
     static void addPublication(Project project) {
+        project.apply plugin: "maven-publish"
         project.publishing {
             publications {
                 bootJava( MavenPublication ) {
