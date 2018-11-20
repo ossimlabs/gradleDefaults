@@ -13,6 +13,8 @@ class AddPublications {
                         println(project.name)
                         println(project.groupName)
                         println(project.version)
+                        println("${buildDir}/libs/${project.name}-${project.version}.jar")
+                        println("=====")
                         artifactId = project.name
                         groupId = project.groupName
                         version = project.version
