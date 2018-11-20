@@ -4,7 +4,7 @@ import org.gradle.api.Project;
 
 class Variables {
 
-    String getCurrentGitBranch() {
+    static String getCurrentGitBranch() {
         def gitBranch = "Unknown branch"
         try {
             println "${project.projectDir}"
