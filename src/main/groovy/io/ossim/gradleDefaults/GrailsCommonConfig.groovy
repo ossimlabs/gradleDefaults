@@ -30,7 +30,6 @@ class GrailsCommonConfig {
 
         Variables.setVersionVariables(subproject)
         Variables.setAdditionalVariables(subproject)
-        AddPublications.addPublication(subproject)
 
         subproject.repositories {
             mavenLocal()
@@ -134,6 +133,8 @@ class GrailsCommonConfig {
                 developers = [johndoe:"John Doe"]
             }
         }
+        
+        AddPublications.addPublication(subproject)
 
         subproject.assets {
             if (isGrailsApp) {
