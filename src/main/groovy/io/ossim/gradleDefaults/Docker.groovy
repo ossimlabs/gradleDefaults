@@ -89,7 +89,10 @@ class Docker {
 
         // Add each subproject assemble task as a dependency for the copyTask
         for (Project subProject : project.getAllprojects()){
-            project.copyJarToDockerDir.dependsOn.add(":${subProject.name}:assemble")
+            if (subProject.tasks.findByName('assemble')) {
+                def assembleTask = subProject.tasks.findByName('assemble')
+                project.copyJarToDockerDir.dependsOn assembleTask
+            }
         }
 
         // Pull the base docker image from the remote repo

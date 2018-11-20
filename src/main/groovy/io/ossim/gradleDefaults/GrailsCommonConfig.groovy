@@ -79,8 +79,9 @@ class GrailsCommonConfig {
             compile "org.grails.plugins:scaffolding"
             compile "org.grails.plugins:gsp"
             console "org.grails:grails-console"
-            runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.14.8"
+            runtime "com.bertramlabs.plugins:asset-pipeline-grails:${assetPipelineGrailsV}"
             testCompile "org.grails:grails-web-testing-support"
+            testCompile "org.grails.plugins:geb:1.1.2"
 
 
             if (isGrailsApp) {
@@ -88,14 +89,13 @@ class GrailsCommonConfig {
                 compile "org.grails.plugins:hibernate5"
                 compile "org.hibernate:hibernate-core:5.1.5.Final"
                 profile "org.grails.profiles:web"
-                runtime "org.glassfish.web:el-impl:2.1.2-b03"
+                runtime "org.glassfish.web:el-impl:${elImplV}"
                 runtime "com.h2database:h2"
                 runtime "org.apache.tomcat:tomcat-jdbc"
                 testCompile "org.grails:grails-gorm-testing-support"
-                testCompile "org.grails.plugins:geb:1.1.2"
-                testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:2.47.1"
-                testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-                testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+                testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumHtmlUnitDriverV}"
+                testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:${seleniumHtmlUnitDriverV}"
+                testRuntime "net.sourceforge.htmlunit:htmlunit:${htmlUnitV}"
             } else if (isGrailsPlugin) {
 
                 profile "org.grails.profiles:web-plugin"
