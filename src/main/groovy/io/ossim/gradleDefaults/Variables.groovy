@@ -4,7 +4,7 @@ import org.gradle.api.Project;
 
 class Variables {
 
-    static String getCurrentGitBranch() {
+    static String getCurrentGitBranch(Project project) {
         def gitBranch = "Unknown branch"
         try {
             println "${project.projectDir}"
@@ -24,7 +24,7 @@ class Variables {
         project.ext {
             mavenRepoUrl = System.getenv('MAVEN_REPOSITORY_URL')
             gradleOffline = System.getenv('GRADLE_OFFLINE')
-            buildVersionTag = getCurrentGitBranch() == "master" ? "RELEASE" : "SNAPSHOT"
+            buildVersionTag = getCurrentGitBranch(project) == "master" ? "RELEASE" : "SNAPSHOT"
         }
     }
 
