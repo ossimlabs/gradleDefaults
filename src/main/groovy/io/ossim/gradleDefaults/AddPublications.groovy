@@ -9,7 +9,7 @@ class AddPublications {
         project.with {
             publishing {
                 publications {
-                    project.name(MavenPublication) {
+                    "${name}" (MavenPublication) {
                         artifact(file("${buildDir}/libs/${project.name}-${project.version}.jar"))
                     }
                 }
