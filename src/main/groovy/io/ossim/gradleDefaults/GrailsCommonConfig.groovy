@@ -37,16 +37,6 @@ class GrailsCommonConfig {
             maven { url "https://repo.grails.org/grails/core" }
         }
 
-//        subproject.apply plugin: "java-base"
-//        subproject.apply plugin: "maven-publish"
-//        subproject.publishing {
-//            publications {
-//                mavenJava(MavenPublication) {
-//                    from components.java
-//                }
-//            }
-//        }
-
         // Apply plugins
         subproject.apply plugin: "eclipse"
         subproject.apply plugin: "idea"
@@ -119,19 +109,19 @@ class GrailsCommonConfig {
             }
         } else if (isGrailsPlugin) {
             // enable if you wish to package this plugin as a standalone application
-            subproject.bootRepackage.enabled = false
-            subproject.grailsPublish {
-                // TODO: Provide values here
-                user = 'user'
-                key = 'key'
-                githubSlug = 'foo/bar'
-                license {
-                    name = 'Apache-2.0'
-                }
-                title = "My Plugin"
-                desc = "Full plugin description"
-                developers = [johndoe:"John Doe"]
-            }
+//            subproject.bootRepackage.enabled = false
+//            subproject.grailsPublish {
+//                // TODO: Provide values here
+//                user = 'user'
+//                key = 'key'
+//                githubSlug = 'foo/bar'
+//                license {
+//                    name = 'Apache-2.0'
+//                }
+//                title = "My Plugin"
+//                desc = "Full plugin description"
+//                developers = [johndoe:"John Doe"]
+//            }
         }
 
         AddPublications.addPublication(subproject)
