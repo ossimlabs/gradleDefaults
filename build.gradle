@@ -29,19 +29,19 @@ dependencies {
 group = 'io.ossim'
 version = '1.0'
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = group
-            artifactId = project.name
-            version = version
-
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url = "System.env('MAVEN_REPOSITORY_URL')"
-        }
-    }
-}
+//publishing {
+//    publications {
+//        maven(MavenPublication) {
+//            groupId = group
+//            artifactId = project.name
+//           version = version
+//
+//            from components.java
+//        }
+//    }
+//    repositories {
+//        maven {
+//            url = "System.env('MAVEN_REPOSITORY_URL')"
+//        }
+//    }
+//}
