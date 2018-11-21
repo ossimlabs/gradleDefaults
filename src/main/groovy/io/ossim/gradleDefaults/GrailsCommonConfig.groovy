@@ -45,7 +45,7 @@ class GrailsCommonConfig {
         }
         if (isGrailsPlugin) {
             subproject.apply plugin: "org.grails.grails-plugin"
-            subproject.apply plugin: "org.grails.grails-plugin-publish"
+//            subproject.apply plugin: "org.grails.grails-plugin-publish"
         }
         subproject.apply plugin: "org.grails.grails-gsp"
         subproject.apply plugin: "asset-pipeline"
