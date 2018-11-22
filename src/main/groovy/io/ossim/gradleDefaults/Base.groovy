@@ -15,6 +15,10 @@ class Base implements Plugin<Project> {
         Variables.setVersionVariables(project)
         Variables.setAdditionalVariables(project)
 
+        for (Project subproject : project.getAllprojects()){
+            SonarQube.addSonarQubeDependency(subproject)
+        }
+
         if (project.findProperty('includeDocker')) {
             Docker docker = new Docker()
             docker.apply(project)

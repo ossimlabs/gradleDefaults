@@ -147,6 +147,8 @@ class Docker {
                     .mustRunAfter(project.tasks.getByName('pushDockerImage'))
             project.tasks.getByName('clean')
                     .mustRunAfter(project.tasks.getByName('pushDockerImage'))
+
+            onlyIf { return buildDocker }
         }
 
         // Add each subproject clean task as a dependency for the doAllDocker task
