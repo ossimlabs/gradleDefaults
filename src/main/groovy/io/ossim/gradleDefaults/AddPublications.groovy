@@ -10,19 +10,12 @@ class AddPublications {
             publishing {
                 publications {
                     "${name}" (MavenPublication) {
-                        println(project.name)
-                        println(project.groupName)
-                        println(project.version)
-                        println("${buildDir}/libs/${project.name}-${project.version}.jar")
-                        println("=====")
                         artifactId = project.name
                         groupId = project.groupName
                         if (project.buildVersionTag == "SNAPSHOT") {
                             version = "${project.version}-SNAPSHOT"
-                            println("${project.version}-SNAPSHOT")
                         } else{
                             version = "${project.version}"
-                            println("${project.version}")
                         }
                         artifact(file("${buildDir}/libs/${project.name}-${project.version}.jar"))
                     }
