@@ -24,6 +24,7 @@ dependencies {
     compile "org.grails:grails-gradle-plugin:$grailsVersion"
     compile "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
     compile "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.8"
+    compile "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
 }
 
 group = 'io.ossim'
