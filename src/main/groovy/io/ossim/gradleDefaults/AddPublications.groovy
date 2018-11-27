@@ -26,7 +26,7 @@ class AddPublications {
                             username System.getenv('MAVEN_REPOSITORY_USERNAME')
                             password System.getenv('MAVEN_REPOSITORY_PASSWORD')
                         }
-                        url = "${System.getenv('MAVEN_REPOSITORY_URL')}/o2-${project.buildVersionTag}"
+                        url = "${System.getenv('MAVEN_REPOSITORY_URL')}/o2-${project.buildVersionTag}/"
                     }
                 }
             }
