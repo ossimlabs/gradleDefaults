@@ -21,8 +21,8 @@ class Docker {
         String dockerRegistryUrl = System.getenv("DOCKER_REGISTRY_URL")
 
         DockerRegistryCredentials dockerRegistryCredentials = new DockerRegistryCredentials()
-        dockerRegistryCredentials.username = System.getenv("DOCKER_USERNAME")
-        dockerRegistryCredentials.password = System.getenv("DOCKER_PASSWORD")
+        dockerRegistryCredentials.username = System.getenv("DOCKER_REGISTRY_USERNAME")
+        dockerRegistryCredentials.password = System.getenv("DOCKER_REGISTRY_PASSWORD")
         dockerRegistryCredentials.url = dockerRegistryUrl
 
         // Variables pulled from gradle.properties or other locations
