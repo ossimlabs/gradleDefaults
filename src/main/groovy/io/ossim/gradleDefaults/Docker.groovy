@@ -51,7 +51,7 @@ class Docker {
             jarFile = "${project.name}-app-${versionNumber}.jar"
         }
 
-        if (project.hasProperty('jarFile')) {
+        if (project.hasProperty('dockerDir')) {
             dockerDir = project.dockerDir
         } else {
             dockerDir = "${project.rootDir}/docker"
