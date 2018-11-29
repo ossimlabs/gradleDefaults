@@ -11,6 +11,15 @@ class AddPublications {
                 publications {
                     "${name}" (MavenPublication) {
                         artifactId = project.name
+
+                        // Use the default io.ossim.omar group name unless specified otherwise
+                        string groupName
+                        if (project.hasProperty('groupName')) {
+                            groupName = project.groupName
+                        } else {
+                            groupName = "io.ossim.omar"
+                        }
+
                         groupId = project.groupName
                         if (project.buildVersionTag == "SNAPSHOT") {
                             version = "${project.version}-SNAPSHOT"
