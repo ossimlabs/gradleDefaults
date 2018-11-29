@@ -28,21 +28,23 @@ dependencies {
 }
 
 group = 'io.ossim'
-version = '1.0'
+version = '1.0-SNAPSHOT'
 
-//publishing {
-//    publications {
-//        maven(MavenPublication) {
-//            groupId = group
-//            artifactId = project.name
-//           version = version
-//
-//            from components.java
-//        }
-//    }
-//    repositories {
-//        maven {
-//            url = "System.env('MAVEN_REPOSITORY_URL')"
-//        }
-//    }
-//}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = project.name
+            version = version
+        }
+    }
+    repositories {
+        maven {
+            url = "${System.getenv('MAVEN_REPOSITORY_URL')}/o2-SNAPSHOT"
+            credentials {
+                            username System.getenv('MAVEN_REPOSITORY_USERNAME')
+                            password System.getenv('MAVEN_REPOSITORY_PASSWORD')
+                        }
+        }
+    }
+}
