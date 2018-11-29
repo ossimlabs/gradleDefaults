@@ -24,8 +24,10 @@ class AddPublications {
                         groupId = groupName
                         if (project.buildVersionTag == "SNAPSHOT") {
                             version = "${project.version}-SNAPSHOT"
+                            version "${project.version}-SNAPSHOT"
                         } else{
                             version = "${project.version}"
+                            version "${project.version}"
                         }
 //                        println("Producing: ${groupId}:${artifactId}:${version}")
                         artifact(file("${buildDir}/libs/${project.name}-${project.version}.jar"))
