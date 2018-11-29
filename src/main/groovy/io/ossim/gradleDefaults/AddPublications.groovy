@@ -13,7 +13,7 @@ class AddPublications {
                         artifactId = project.name
 
                         // Use the default io.ossim.omar group name unless specified otherwise
-                        string groupName
+                        String groupName
                         if (project.hasProperty('groupName')) {
                             groupName = project.groupName
                         } else {
