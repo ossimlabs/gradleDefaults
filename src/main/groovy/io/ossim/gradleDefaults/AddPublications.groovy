@@ -20,7 +20,7 @@ class AddPublications {
                             groupName = "io.ossim.omar"
                         }
 
-                        groupId = project.groupName
+                        groupId = groupName
                         if (project.buildVersionTag == "SNAPSHOT") {
                             version = "${project.version}-SNAPSHOT"
                         } else{
