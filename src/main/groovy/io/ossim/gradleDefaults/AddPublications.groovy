@@ -20,13 +20,14 @@ class AddPublications {
                             groupName = "io.ossim.omar"
                         }
 
+                        group groupName
                         groupId = groupName
                         if (project.buildVersionTag == "SNAPSHOT") {
                             version = "${project.version}-SNAPSHOT"
                         } else{
                             version = "${project.version}"
                         }
-                        println("Producing: ${groupId}:${artifactId}:${version}")
+//                        println("Producing: ${groupId}:${artifactId}:${version}")
                         artifact(file("${buildDir}/libs/${project.name}-${project.version}.jar"))
                     }
                 }
