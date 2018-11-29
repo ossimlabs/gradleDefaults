@@ -19,6 +19,7 @@ class AddPublications {
                         } else {
                             groupName = "io.ossim.omar"
                         }
+                        println("Inserting groupName: ${groupName}")
 
                         groupId = groupName
                         if (project.buildVersionTag == "SNAPSHOT") {
