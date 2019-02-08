@@ -2,7 +2,7 @@ package io.ossim.gradleDefaults
 
 import org.gradle.api.Project
 
-class OpenShift {
+class Openshift {
     static void addDockerTasks(Project project,
                                String openshiftUrl,
                                String openshiftUsername,
