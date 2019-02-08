@@ -7,14 +7,14 @@ class Variables {
     static void setAdditionalVariables(Project project){
         project.ext {
             nexusContextUrl = "${System.env.REPOSITORY_MANAGER_URL}"
-            ossimMavenProxy = System.env.OSSIM_MAVEN_PROXY ?: "${System.env.REPOSITORY_MANAGER_URL}/ossim-deps"
-            omarMavenProxy = System.env.OMAR_MAVEN_PROXY ?: "${System.env.REPOSITORY_MANAGER_URL}/omar-deps"
+            ossimMavenProxy = System.env.OSSIM_MAVEN_PROXY ?: "${mavenRepoUrl}/ossim-deps"
+            omarMavenProxy = System.env.OMAR_MAVEN_PROXY ?: "${mavenRepoUrl}/omar-deps"
 
             gitBranch = Git.getCurrentGitBranch(project)
             buildVersionTag = gitBranch == "master" ? "RELEASE" : "SNAPSHOT"
             latestGradleIdentifier = gitBranch == "master" ? "latest.release" : "latest.integration"
 
-            mavenPublishUrl = System.env.MAVEN_PUBLISH_URL ?: "${System.env.REPOSITORY_MANAGER_URL}/omar-local-${buildVersionTag.toLowerCase()}"
+            mavenPublishUrl = System.env.MAVEN_PUBLISH_URL ?: "${mavenRepoUrl}/omar-local-${buildVersionTag.toLowerCase()}"
 
             openShiftUrl = "${System.env.OPENSHIFT_URL}"
             yumTag = (buildVersionTag == "SNAPSHOT" ? "dev" : "master")
