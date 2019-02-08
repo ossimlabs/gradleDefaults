@@ -1,8 +1,7 @@
 buildscript {
     repositories {
         mavenLocal()
-        maven { url "https://repo.grails.org/grails/core" }
-        jcenter()
+         maven { url ossimMavenProxy }
     }
     dependencies {
         classpath 'io.ossim:gradleDefaults:1.0-SNAPSHOT'
@@ -17,7 +16,7 @@ plugins {
 
 repositories {
   mavenLocal()
-  maven { url "${ossimMavenProxy}" }
+  maven { url ossimMavenProxy }
 }
 
 dependencies {
