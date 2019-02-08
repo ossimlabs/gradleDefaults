@@ -2,24 +2,17 @@ package io.ossim.gradleDefaults
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.diagnostics.DependencyReportTask
 
 class Base implements Plugin<Project> {
 
 
     @Override
     void apply(Project project) {
-//        if (project.findProperty('grailsCommonConfig')) {
-//            new GrailsCommonConfig().apply(project)
-//        }
-
-        Variables.setVersionVariables(project)
-        Variables.setAdditionalVariables(project)
-
-        if (project.findProperty('includeDocker')) {
-            Docker docker = new Docker()
-            docker.apply(project)
-        }
 
     }
 
+    static void addMiscHelperTasks(Project project) {
+        project.task('printAllDependencies', type: DependencyReportTask) {}
+    }
 }

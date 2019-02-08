@@ -4,27 +4,26 @@ import org.gradle.api.Project;
 
 class Variables {
 
-    static String getCurrentGitBranch(Project project) {
-        def gitBranch = "Unknown branch"
-        try {
-            println "${project.projectDir}"
-            def workingDir = new File("${project.projectDir}")
-            def result = 'git rev-parse --abbrev-ref HEAD'.execute(null, workingDir)
-            result.waitFor()
-            if (result.exitValue() == 0) {
-                gitBranch = result.text.trim()
-            }
-        } catch (e) {
-            e.printStackTrace()
-        }
-        return gitBranch
-    }
-
     static void setAdditionalVariables(Project project){
         project.ext {
-            mavenRepoUrl = System.getenv('MAVEN_REPOSITORY_URL')
-            gradleOffline = System.getenv('GRADLE_OFFLINE')
-            buildVersionTag = getCurrentGitBranch(project) == "master" ? "RELEASE" : "SNAPSHOT"
+            nexusContextUrl = "${System.env.REPOSITORY_MANAGER_URL}"
+            ossimMavenProxy = System.env.OSSIM_MAVEN_PROXY ?: "${System.env.REPOSITORY_MANAGER_URL}/ossim-deps"
+            omarMavenProxy = System.env.OMAR_MAVEN_PROXY ?: "${System.env.REPOSITORY_MANAGER_URL}/omar-deps"
+
+            gitBranch = Git.getCurrentGitBranch(project)
+            buildVersionTag = gitBranch == "master" ? "RELEASE" : "SNAPSHOT"
+            latestGradleIdentifier = gitBranch == "master" ? "latest.release" : "latest.integration"
+
+            mavenPublishUrl = System.env.MAVEN_PUBLISH_URL ?: "${System.env.REPOSITORY_MANAGER_URL}/omar-local-${buildVersionTag.toLowerCase()}"
+
+            openShiftUrl = "${System.env.OPENSHIFT_URL}"
+            yumTag = (buildVersionTag == "SNAPSHOT" ? "dev" : "master")
+            dockerAppTag = "${System.env.DOCKER_TAG}"
+            dockerRegistryUrl = "${System.env.DOCKER_REGISTRY_URL}"
+            registryProjectName = "${System.env.REGISTRY_PROJECT_NAME}"
+            openShiftUserName = "${System.env.OPENSHIFT_USERNAME}"
+            openShiftPassword = "${System.env.OPENSHIFT_PASSWORD}"
+            dockerNamespaceUrl = "${dockerRegistryUrl}/"
         }
     }
 
@@ -63,6 +62,5 @@ class Variables {
             npmCesiumV = "1.38.0"
             hibernateEhcacheV = "5.3.0.CR1"
         }
-
     }
 }

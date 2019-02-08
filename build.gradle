@@ -4,6 +4,9 @@ buildscript {
         maven { url "https://repo.grails.org/grails/core" }
         jcenter()
     }
+    dependencies {
+        classpath 'io.ossim:gradleDefaults:1.0-SNAPSHOT'
+    }
 }
 
 plugins {
@@ -13,38 +16,20 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
-    jcenter()
+  mavenLocal()
+  maven { url "${ossimMavenProxy}" }
 }
 
 dependencies {
     compile gradleApi()
     compile 'com.bmuschko:gradle-docker-plugin:3.0.12'
-    compile "org.grails:grails-gradle-plugin:$grailsVersion"
-    compile "org.grails.plugins:hibernate5:${gormVersion-".RELEASE"}"
-    compile "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.8"
     compile "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
 }
 
-group = 'io.ossim'
-version = '1.0-SNAPSHOT'
+io.ossim.gradleDefaults.Variables.setAdditionalVariables(project)
+io.ossim.gradleDefaults.Variables.setVersionVariables(project)
+version "${buildVersion}-${buildVersionTag}"
+jarDestination = "${projectDir}/build/libs/${project.name}-${version}.jar"
+io.ossim.gradleDefaults.Publications.addPublication(project, groupName, name, "${buildVersion}-${buildVersionTag}")
+io.ossim.gradleDefaults.Publications.addRepository(project, mavenPublishUrl, mavenRepoUsername, mavenRepoPassword)
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = group
-            artifactId = project.name
-            version = version
-        }
-    }
-    repositories {
-        maven {
-            url = "${System.getenv('MAVEN_REPOSITORY_URL')}/o2-SNAPSHOT"
-            credentials {
-                            username System.getenv('MAVEN_REPOSITORY_USERNAME')
-                            password System.getenv('MAVEN_REPOSITORY_PASSWORD')
-                        }
-        }
-    }
-}
