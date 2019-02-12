@@ -6,24 +6,49 @@ class Variables {
 
     static void setAdditionalVariables(Project project){
         project.ext {
-            nexusContextUrl = "${System.env.REPOSITORY_MANAGER_URL}"
-            ossimMavenProxy = System.env.OSSIM_MAVEN_PROXY ?: "${mavenRepoUrl}/ossim-deps"
-            omarMavenProxy = System.env.OMAR_MAVEN_PROXY ?: "${mavenRepoUrl}/omar-deps"
-
             gitBranch = Git.getCurrentGitBranch(project)
             buildVersionTag = gitBranch == "master" ? "RELEASE" : "SNAPSHOT"
             latestGradleIdentifier = gitBranch == "master" ? "latest.release" : "latest.integration"
 
-            mavenPublishUrl = System.env.MAVEN_PUBLISH_URL ?: "${mavenRepoUrl}/omar-local-${buildVersionTag.toLowerCase()}"
-
-            openShiftUrl = "${System.env.OPENSHIFT_URL}"
             yumTag = (buildVersionTag == "SNAPSHOT" ? "dev" : "master")
-            dockerAppTag = "${System.env.DOCKER_TAG}"
-            dockerRegistryUrl = "${System.env.DOCKER_REGISTRY_URL}"
-            registryProjectName = "${System.env.REGISTRY_PROJECT_NAME}"
-            openShiftUserName = "${System.env.OPENSHIFT_USERNAME}"
-            openShiftPassword = "${System.env.OPENSHIFT_PASSWORD}"
-            dockerNamespaceUrl = "${dockerRegistryUrl}/"
+        }
+
+        setVariable(project, 'mavenRepoUrl', 'MAVEN_REPO_URL', null)
+        setVariable(project, 'mavenRepoUsername', 'MAVEN_REPO_USERNAME', null)
+        setVariable(project, 'mavenRepoPassword', 'MAVEN_REPO_PASSWORD', null)
+        setVariable(project, 'ossimMavenProxy', 'OSSIM_MAVEN_PROXY', "${project.mavenRepoUrl}/ossim-deps")
+        setVariable(project, 'omarMavenProxy', 'OMAR_MAVEN_PROXY', "${project.mavenRepoUrl}/omar-deps")
+        setVariable(project, 'mavenPublishUrl', 'MAVEN_PUBLISH_URL', "${project.mavenRepoUrl}/omar-local-${project.buildVersionTag.toLowerCase()}")
+
+        setVariable(project, 'dockerImageTag', 'DOCKER_TAG', null)
+        setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_URL', null)
+        setVariable(project, 'dockerRegistryUsername', 'DOCKER_REGISTRY_USERNAME', null)
+        setVariable(project, 'dockerRegistryPassword', 'DOCKER_REGISTRY_PASSWORD', null)
+
+        setVariable(project, 'openshiftUrl', 'OPENSHIFT_URL', null)
+        setVariable(project, 'openshiftUserName', 'OPENSHIFT_USERNAME', null)
+        setVariable(project, 'openshiftPassword', 'OPENSHIFT_PASSWORD', null)
+        setVariable(project, 'openshiftProjectName', 'OPENSHIFT_PROJECT_NAME', null)
+    }
+
+    /**
+     * If the property with name propName does not exist or is null, it should be overwritten
+     * by the environment variable or the default
+     * @param project
+     * @param propName
+     * @param envName
+     * @param defaultValue
+     */
+    static void setVariable(Project project, String propName, String envName, String defaultValue) {
+
+        if (project.hasProperty(propName) && project.property(propName) != null) {
+            return
+        }
+
+        String value = System.getenv(envName) == null ? defaultValue : System.getenv(envName)
+
+        project.ext {
+            setProperty(propName, value)
         }
     }
 
