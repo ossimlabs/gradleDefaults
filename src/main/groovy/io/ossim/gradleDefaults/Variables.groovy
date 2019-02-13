@@ -26,7 +26,7 @@ class Variables {
         setVariable(project, 'dockerRegistryPassword', 'DOCKER_REGISTRY_PASSWORD', null)
 
         setVariable(project, 'openshiftUrl', 'OPENSHIFT_URL', null)
-        setVariable(project, 'openshiftUserName', 'OPENSHIFT_USERNAME', null)
+        setVariable(project, 'openshiftUsername', 'OPENSHIFT_USERNAME', null)
         setVariable(project, 'openshiftPassword', 'OPENSHIFT_PASSWORD', null)
         setVariable(project, 'openshiftProjectName', 'OPENSHIFT_PROJECT_NAME', null)
     }
