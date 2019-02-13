@@ -41,7 +41,9 @@ class Variables {
      */
     static void setVariable(Project project, String propName, String envName, String defaultValue) {
 
-        if (project.hasProperty(propName) && project.property(propName) != null) {
+        if (project.hasProperty(propName) &&
+                project.property(propName) != null &&
+                project.property(propName).toString() != '') {
             return
         }
 
