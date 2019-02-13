@@ -12,7 +12,7 @@ class Publications {
                     "${artifactName}" (MavenPublication) {
                         group groupName
                         groupId = groupName
-                        version version
+                        version versionNumber
                         artifact(file("${buildDir}/libs/${artifactName}-${versionNumber}.jar"))
                     }
                 }
