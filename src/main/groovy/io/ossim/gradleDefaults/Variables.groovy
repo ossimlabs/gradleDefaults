@@ -20,7 +20,7 @@ class Variables {
         setVariable(project, 'omarMavenProxy', 'OMAR_MAVEN_PROXY', "${project.mavenRepoUrl}/omar-deps")
         setVariable(project, 'mavenPublishUrl', 'MAVEN_PUBLISH_URL', "${project.mavenRepoUrl}/omar-local-${project.buildVersionTag.toLowerCase()}")
 
-        setVariable(project, 'dockerImageTag', 'DOCKER_TAG', null)
+        setVariable(project, 'dockerImageTag', 'DOCKER_TAG', 'latest')
         setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_URL', null)
         setVariable(project, 'dockerRegistryUsername', 'DOCKER_REGISTRY_USERNAME', null)
         setVariable(project, 'dockerRegistryPassword', 'DOCKER_REGISTRY_PASSWORD', null)
