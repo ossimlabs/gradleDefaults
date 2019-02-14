@@ -40,17 +40,23 @@ class Variables {
      * @param defaultValue
      */
     static void setVariable(Project project, String propName, String envName, String defaultValue) {
+        String finalValue
 
-        if (project.hasProperty(propName) &&
-                project.property(propName) != null &&
-                project.property(propName).toString() != '') {
-            return
+        String envValue = System.getenv(envName)
+        if (envValue) {
+            finalValue = envValue
+        } else {
+            if (project.hasProperty(propName) &&
+                    project.property(propName) != null &&
+                    project.property(propName).toString() != '') {
+                return
+            } else {
+                finalValue = defaultValue
+            }
         }
 
-        String value = System.getenv(envName) == null ? defaultValue : System.getenv(envName)
-
         project.ext {
-            setProperty(propName, value)
+            setProperty(propName, finalValue)
         }
     }
 
