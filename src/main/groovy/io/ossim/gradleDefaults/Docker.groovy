@@ -26,14 +26,7 @@ class Docker {
         dockerRegistryCredentials.password = dockerRegistryPassword
         dockerRegistryCredentials.url = dockerRegistryUrl
 
-        // Copy the built jar to the docker directory
-        project.task('copyJarToDockerDir', type: Copy, dependsOn: ['assemble']) {
-            doFirst {
-                println "Copying ${jarPath} to ${dockerBuildDir}"
-            }
-            from jarPath
-            into dockerBuildDir
-        }
+
 
         // Add each subproject assemble task as a dependency for the copyTask
         for (Project subProject : project.getAllprojects()){
@@ -43,11 +36,25 @@ class Docker {
             }
         }
 
-        project.task('buildDockerImage', type: DockerBuildImage, dependsOn: ['copyJarToDockerDir']) {
+        project.task('buildDockerImage', type: DockerBuildImage) {
             inputDir = project.file(dockerBuildDir)
             tag = "${dockerImageName}:${dockerBuildTag}"
             buildArgs = buildArguments
             registryCredentials = dockerRegistryCredentials
+        }
+
+        if (jarPath != null && jarPath != '') {
+            // Copy the built jar to the docker directory
+            project.task('copyJarToDockerDir', type: Copy, dependsOn: ['assemble']) {
+                doFirst {
+                    println "Copying ${jarPath} to ${dockerBuildDir}"
+                }
+                from jarPath
+                into dockerBuildDir
+            }
+
+            def copyJarToDockerDirTask = project.tasks.findByName('copyJarToDockerDir')
+            project.buildDockerImage.dependsOn copyJarToDockerDirTask
         }
 
         project.task('tagDockerImage', type: DockerTagImage, dependsOn: 'buildDockerImage'){
