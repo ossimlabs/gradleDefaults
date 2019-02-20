@@ -26,16 +26,6 @@ class Docker {
         dockerRegistryCredentials.password = dockerRegistryPassword
         dockerRegistryCredentials.url = dockerRegistryUrl
 
-
-
-        // Add each subproject assemble task as a dependency for the copyTask
-        for (Project subProject : project.getAllprojects()){
-            if (subProject.tasks.findByName('assemble')) {
-                def assembleTask = subProject.tasks.findByName('assemble')
-                project.copyJarToDockerDir.dependsOn assembleTask
-            }
-        }
-
         project.task('buildDockerImage', type: DockerBuildImage) {
             inputDir = project.file(dockerBuildDir)
             tag = "${dockerImageName}:${dockerBuildTag}"
