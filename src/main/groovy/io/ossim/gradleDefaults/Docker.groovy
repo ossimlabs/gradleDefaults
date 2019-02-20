@@ -45,7 +45,7 @@ class Docker {
 
         if (jarPath != null && jarPath != '') {
             // Copy the built jar to the docker directory
-            project.task('copyJarToDockerDir', type: Copy, dependsOn: ['assemble']) {
+            project.task('copyJarToDockerDir', type: Copy) {
                 doFirst {
                     println "Copying ${jarPath} to ${dockerBuildDir}"
                 }
