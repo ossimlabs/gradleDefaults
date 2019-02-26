@@ -18,6 +18,10 @@ class Publications {
                     }
                 }
             }
+
+            jar.onlyIf {
+                !file(jarDestination).exists()
+            }
         }
     }
 
