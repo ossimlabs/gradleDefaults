@@ -5,7 +5,6 @@ import org.gradle.api.publish.maven.MavenPublication
 
 class Publications {
     static void addPublication(Project project, String groupName, String artifactName, String versionNumber) {
-        project.apply plugin: "maven-publish"
         project.with {
             publishing {
                 publications {
