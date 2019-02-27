@@ -12,7 +12,6 @@ class Publications {
                         group groupName
                         groupId = groupName
                         version versionNumber
-//                        artifact(file("${buildDir}/libs/${artifactName}-${versionNumber}.jar"))
                         from components.java
                     }
                 }
