@@ -5,11 +5,13 @@ import org.gradle.api.Project;
 class Variables {
 
     static void setAdditionalVariables(Project project){
+
+        setVariable(project, 'gitBranch', 'BRANCH_NAME', Git.getCurrentGitBranch(project))
+
         project.ext {
-            gitBranch = Git.getCurrentGitBranch(project)
             buildVersionTag = gitBranch == "master" ? "RELEASE" : "SNAPSHOT"
             latestGradleIdentifier = gitBranch == "master" ? "latest.release" : "latest.integration"
-
+            dockerFromTag = gitBranch == "master" ? "release" : "latest"
             yumTag = (buildVersionTag == "SNAPSHOT" ? "dev" : "master")
         }
 
@@ -20,7 +22,7 @@ class Variables {
         setVariable(project, 'omarMavenProxy', 'OMAR_MAVEN_PROXY', "${project.mavenRepoUrl}/omar-deps")
         setVariable(project, 'mavenPublishUrl', 'MAVEN_PUBLISH_URL', "${project.mavenRepoUrl}/omar-local-${project.buildVersionTag.toLowerCase()}")
 
-        setVariable(project, 'dockerImageTag', 'DOCKER_TAG', 'latest')
+        setVariable(project, 'dockerImageTag', 'DOCKER_TAG', "${project.gitBranch}")
         setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_URL', null)
         setVariable(project, 'dockerRegistryUsername', 'DOCKER_REGISTRY_USERNAME', null)
         setVariable(project, 'dockerRegistryPassword', 'DOCKER_REGISTRY_PASSWORD', null)
