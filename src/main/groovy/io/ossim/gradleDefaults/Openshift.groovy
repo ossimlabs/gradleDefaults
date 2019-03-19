@@ -30,7 +30,7 @@ class Openshift {
             commandLine 'oc',
                     'tag',
                     '--source=docker',
-                    "${dockerRegistryUrl}${dockerImageName}",
+                    "${dockerRegistryUrl}${dockerImageName}:${dockerImageTag}",
                     "${openshiftProjectName}/${openshiftServiceName}:${dockerImageTag}",
                     '--scheduled=true'
         }
