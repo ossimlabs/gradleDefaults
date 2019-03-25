@@ -31,6 +31,11 @@ class Docker {
             tag = "${dockerImageName}:${dockerBuildTag}"
             buildArgs = buildArguments
             registryCredentials = dockerRegistryCredentials
+            doFirst {
+                if (buildArguments) {
+                    println("Using ${buildArguments} as build args")
+                }
+            }
         }
 
         if (jarPath != null && jarPath != '') {
