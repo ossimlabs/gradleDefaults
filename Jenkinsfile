@@ -7,7 +7,8 @@ properties([
             [$class: "GitHubPushTrigger"]
     ]),
     [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ossimlabs/gradleDefaults'],
-    disableConcurrentBuilds()
+    disableConcurrentBuilds(),
+    buildDiscarder( logRotator( numToKeepStr: '5' ) )
 ])
 
 node("${BUILD_NODE}"){
@@ -34,7 +35,6 @@ node("${BUILD_NODE}"){
         gradle assemble \
             -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
         """
-        archiveArtifacts "build/libs/*.jar"
     }
 
     stage ("Publish Nexus")
