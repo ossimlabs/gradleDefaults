@@ -11,7 +11,7 @@ class Variables {
         project.ext {
             buildVersionTag = gitBranch == "master" ? "RELEASE" : "SNAPSHOT"
             latestGradleIdentifier = gitBranch == "master" ? "latest.release" : "latest.integration"
-            dockerFromTag = gitBranch == "master" ? "release" : "latest"
+            dockerFromTag = gitBranch == "master" ? "master" : "dev"
             yumTag = (buildVersionTag == "SNAPSHOT" ? "dev" : "master")
         }
 
