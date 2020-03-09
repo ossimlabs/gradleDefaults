@@ -24,7 +24,7 @@ class Variables {
 
         setVariable(project, 'dockerImageTag', 'DOCKER_TAG', "${project.gitBranch}")
         setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_URL', null)
-         setVariable(project, 'dockerRegistryPrivateUrl', 'DOCKER_REGISTRY_PRIVATE_URL', null)
+        setVariable(project, 'dockerRegistryPrivateUrl', 'DOCKER_REGISTRY_PRIVATE_URL', null)
         setVariable(project, 'dockerRegistryUsername', 'DOCKER_REGISTRY_USERNAME', null)
         setVariable(project, 'dockerRegistryPassword', 'DOCKER_REGISTRY_PASSWORD', null)
 
