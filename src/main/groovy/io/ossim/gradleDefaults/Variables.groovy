@@ -15,11 +15,11 @@ class Variables {
             yumTag = (buildVersionTag == "SNAPSHOT" ? "dev" : "master")
         }
 
-        setVariable(project, 'mavenRepoUrl', 'REPOSITORY_MANAGER_URL', null)
+        setVariable(project, 'mavenRepoUrl', 'MAVEN_REPO_URL', null)
         setVariable(project, 'mavenRepoUsername', 'MAVEN_REPO_USERNAME', null)
         setVariable(project, 'mavenRepoPassword', 'MAVEN_REPO_PASSWORD', null)
-        // setVariable(project, 'ossimMavenProxy', 'MAVEN_DOWNLOAD_URL', "${project.mavenRepoUrl}/all-repos")
-        // setVariable(project, 'omarMavenProxy', 'MAVEN_DOWNLOAD_URL', "${project.mavenRepoUrl}/omar-deps")
+        setVariable(project, 'ossimMavenProxy', 'OSSIM_MAVEN_PROXY', "${project.mavenRepoUrl}/ossim-deps")
+        setVariable(project, 'omarMavenProxy', 'OMAR_MAVEN_PROXY', "${project.mavenRepoUrl}/omar-deps")
         setVariable(project, 'mavenPublishUrl', 'MAVEN_UPLOAD_URL', "${project.mavenRepoUrl}/ossimlabs")
 
         setVariable(project, 'dockerImageTag', 'DOCKER_TAG', "${project.gitBranch}")
