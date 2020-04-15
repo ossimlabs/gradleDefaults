@@ -20,7 +20,7 @@ class Variables {
         setVariable(project, 'mavenRepoPassword', 'MAVEN_REPO_PASSWORD', null)
         setVariable(project, 'ossimMavenProxy', 'OSSIM_MAVEN_PROXY', "${project.mavenRepoUrl}/ossim-deps")
         setVariable(project, 'omarMavenProxy', 'OMAR_MAVEN_PROXY', "${project.mavenRepoUrl}/omar-deps")
-        setVariable(project, 'mavenPublishUrl', 'MAVEN_UPLOAD_URL', "${project.mavenRepoUrl}/ossimlabs")
+        setVariable(project, 'mavenPublishUrl', 'MAVEN_PUBLISH_URL', "${project.mavenRepoUrl}/ossimlabs")
 
         setVariable(project, 'dockerImageTag', 'DOCKER_TAG', "${project.gitBranch}")
         setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_PUBLIC_UPLOAD_URL', null)
