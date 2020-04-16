@@ -15,7 +15,7 @@ class Variables {
             yumTag = (buildVersionTag == "SNAPSHOT" ? "dev" : "master")
         }
 
-        setVariable(project, 'mavenRepoUrl', 'REPOSITORY_MANAGER_URL', null)
+        setVariable(project, 'mavenRepoUrl', 'MAVEN_REPO_URL', null)
         setVariable(project, 'mavenRepoUsername', 'MAVEN_REPO_USERNAME', null)
         setVariable(project, 'mavenRepoPassword', 'MAVEN_REPO_PASSWORD', null)
         setVariable(project, 'ossimMavenProxy', 'OSSIM_MAVEN_PROXY', "${project.mavenRepoUrl}/ossim-deps")
@@ -23,7 +23,7 @@ class Variables {
         setVariable(project, 'mavenPublishUrl', 'MAVEN_PUBLISH_URL', "${project.mavenRepoUrl}/ossimlabs")
 
         setVariable(project, 'dockerImageTag', 'DOCKER_TAG', "${project.gitBranch}")
-        setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_PUBLIC_UPLOAD_URL', "nexus-docker-public-hosted.ossim.io")
+        setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_PUBLIC_UPLOAD_URL', null)
         setVariable(project, 'dockerRegistryPrivateUrl', 'DOCKER_REGISTRY_PRIVATE_UPLOAD_URL', null)
         setVariable(project, 'dockerRegistryUsername', 'DOCKER_REGISTRY_USERNAME', null)
         setVariable(project, 'dockerRegistryPassword', 'DOCKER_REGISTRY_PASSWORD', null)
