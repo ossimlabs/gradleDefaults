@@ -23,7 +23,7 @@ class Variables {
         setVariable(project, 'mavenPublishUrl', 'MAVEN_PUBLISH_URL', "${project.mavenRepoUrl}/ossimlabs")
 
         setVariable(project, 'dockerImageTag', 'DOCKER_TAG', "${project.gitBranch}")
-        setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_PUBLIC_UPLOAD_URL', null)
+        setVariable(project, 'dockerRegistryUrl', "nexus-docker-public-hosted.ossim.io")
         setVariable(project, 'dockerRegistryPrivateUrl', 'DOCKER_REGISTRY_PRIVATE_UPLOAD_URL', null)
         setVariable(project, 'dockerRegistryUsername', 'DOCKER_REGISTRY_USERNAME', null)
         setVariable(project, 'dockerRegistryPassword', 'DOCKER_REGISTRY_PASSWORD', null)
