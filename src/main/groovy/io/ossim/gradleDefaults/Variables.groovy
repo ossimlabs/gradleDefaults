@@ -18,7 +18,8 @@ class Variables {
         setVariable(project, 'mavenRepoUrl', 'MAVEN_REPO_URL', null)
         setVariable(project, 'mavenRepoUsername', 'MAVEN_REPO_USERNAME', null)
         setVariable(project, 'mavenRepoPassword', 'MAVEN_REPO_PASSWORD', null)
-        setVariable(project, 'ossimMavenProxy', 'OSSIM_MAVEN_PROXY', "${project.mavenRepoUrl}/ossim-deps")
+        //setVariable(project, 'ossimMavenProxy', 'OSSIM_MAVEN_PROXY', "${project.mavenRepoUrl}/ossim-deps")
+        setVariable(project, 'ossimMavenProxy', 'MAVEN_DOWNLOAD_URL', null)
         setVariable(project, 'omarMavenProxy', 'OMAR_MAVEN_PROXY', "${project.mavenRepoUrl}/omar-deps")
         setVariable(project, 'mavenPublishUrl', 'MAVEN_PUBLISH_URL', "${project.mavenRepoUrl}/ossimlabs")
 
