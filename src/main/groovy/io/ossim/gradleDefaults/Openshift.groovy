@@ -3,6 +3,8 @@ package io.ossim.gradleDefaults
 import org.gradle.api.Project
 import org.gradle.api.tasks.Exec
 
+setVariable(dockerRegistryUrl, "nexus-docker-public-hosted.ossim.io")
+
 class Openshift {
     static void addOpenshiftTasks(Project project,
                                String openshiftUrl,
