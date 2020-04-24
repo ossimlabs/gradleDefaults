@@ -23,8 +23,8 @@ class Variables {
         setVariable(project, 'mavenPublishUrl', 'MAVEN_PUBLISH_URL', "${project.mavenRepoUrl}/ossimlabs")
 
         setVariable(project, 'dockerImageTag', 'DOCKER_TAG', "${project.gitBranch}")
-        setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_URL', null)
-        setVariable(project, 'dockerRegistryPrivateUrl', 'DOCKER_REGISTRY_PRIVATE_URL', null)
+        setVariable(project, 'dockerRegistryUrl', 'DOCKER_REGISTRY_PUBLIC_UPLOAD_URL', null)
+        setVariable(project, 'dockerRegistryPrivateUrl', 'DOCKER_REGISTRY_PRIVATE_UPLOAD_URL', null)
         setVariable(project, 'dockerRegistryUsername', 'DOCKER_REGISTRY_USERNAME', null)
         setVariable(project, 'dockerRegistryPassword', 'DOCKER_REGISTRY_PASSWORD', null)
 
@@ -68,8 +68,8 @@ class Variables {
             springBootV = "1.5.10.RELEASE"
             springCloudDependencyV = "Dalston.SR5"
             benManesV = "0.17.0"
-            assetPipelineGradleV = "2.14.10"
-            assetPipelineGrailsV = "2.14.10"
+            assetPipelineGradleV = "3.0.11"
+            assetPipelineGrailsV = "3.0.11"
             springBootAdminStarterClientV = "1.5.7"
             bootstrapSelectV = "2.0.0-beta1"
             slickCarouselV = "1.8.1"

@@ -7,6 +7,7 @@ properties([
             [$class: "GitHubPushTrigger"]
     ]),
     [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/ossimlabs/gradleDefaults'],
+    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '20')),
     disableConcurrentBuilds()
 ])
 
@@ -32,9 +33,8 @@ node("${BUILD_NODE}"){
     stage ("Assemble") {
         sh """
         gradle assemble \
-            -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+            -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
         """
-        archiveArtifacts "build/libs/*.jar"
     }
 
     stage ("Publish Nexus")
@@ -46,7 +46,7 @@ node("${BUILD_NODE}"){
         {
             sh """
             gradle publish \
-                -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+                -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
             """
         }
     }
