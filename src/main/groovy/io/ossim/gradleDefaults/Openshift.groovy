@@ -22,7 +22,7 @@ class Openshift {
                     '-p', openshiftPassword
         }
 
-        if (! dockerRegistryUrl.endsWith('/')){
+        if (! dockerRegistryUrl?.endsWith('/')){
             dockerRegistryUrl += '/'
         }
 
